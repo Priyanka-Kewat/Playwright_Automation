@@ -41,8 +41,12 @@ test.only("Dropdown selection case", async ({ page }) => {
   await page.locator("select.form-control").selectOption("consult");
   await page.locator(".radiotextsty").last().click();
   await page.locator("#okayBtn").click();
+  // await page.waitForTimeout(500);
+  console.log(await page.locator(".radiotextsty").last().isChecked());
 
-  await page.locator("[type=checkbox]").click();
+  // expect(page.locator("radiotextsty").last()).toBeChecked();
+
+  // await page.locator("[type=checkbox]").click();
   // await page.locator("[type=submit]").click();
 
   await page.pause();
