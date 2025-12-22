@@ -31,7 +31,7 @@ test("First Running Case", async ({ browser }) => {
   await page.pause();
 });
 
-test.only("Dropdown selection case", async ({ page }) => {
+test("Dropdown selection case", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
   // await page.goto("https://www.google.com");
   console.log(await page.title());
@@ -44,10 +44,36 @@ test.only("Dropdown selection case", async ({ page }) => {
   // await page.waitForTimeout(500);
   console.log(await page.locator(".radiotextsty").last().isChecked());
 
+  await expect(page.locator("[href*='documents-request']")).toHaveAttribute(
+    "class",
+    "blinkingText"
+  );
+
   // expect(page.locator("radiotextsty").last()).toBeChecked();
 
   // await page.locator("[type=checkbox]").click();
   // await page.locator("[type=submit]").click();
+
+  await page.pause();
+});
+
+test.only("open link in new tab", async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+
+  const [newPage] = await Promise.all([
+    context.waitForEvent("page"),
+
+    page.locator("[href*='documents-request']").click(),
+  ]);
+  const text = await newPage.locator(".red").textContent();
+  console.log(text);
+  const arrayText = text.split("@");
+  const domain = arrayText[1].split(" ")[0];
+  console.log(domain);
+  await page.locator("input#username").fill(domain);
+  console.log(await page.locator("input#username").inputValue());
 
   await page.pause();
 });
