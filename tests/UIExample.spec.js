@@ -62,18 +62,18 @@ test.only("open link in new tab", async ({ browser }) => {
   const page = await context.newPage();
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 
-  const [newPage] = await Promise.all([
-    context.waitForEvent("page"),
+  // const [newPage] = await Promise.all([
+  //   context.waitForEvent("page"),
 
-    page.locator("[href*='documents-request']").click(),
-  ]);
-  const text = await newPage.locator(".red").textContent();
-  console.log(text);
-  const arrayText = text.split("@");
-  const domain = arrayText[1].split(" ")[0];
-  console.log(domain);
-  await page.locator("input#username").fill(domain);
-  console.log(await page.locator("input#username").inputValue());
+  //   page.locator("[href*='documents-request']").click(),
+  // ]);
+  // const text = await newPage.locator(".red").textContent();
+  // console.log(text);
+  // const arrayText = text.split("@");
+  // const domain = arrayText[1].split(" ")[0];
+  // console.log(domain);
+  // await page.locator("input#username").fill(domain);
+  // console.log(await page.locator("input#username").inputValue());
 
-  await page.pause();
+  // await page.pause();
 });
